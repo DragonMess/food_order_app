@@ -1,5 +1,5 @@
-import react from "react";
-import MealItemForm from "./MealItemForm";
+import React from "react";
+import MealItemForm from "../MealItem/MealItemForm";
 
 import classes from "./MealItem.module.css";
 
