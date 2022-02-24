@@ -1,9 +1,14 @@
 import CartContext from "./cart-context";
-
+import { useState } from "react";
 const CartProvider = (props) => {
   const handleAddItem = (item) => {};
 
   const handleRemoveItem = (id) => {};
+
+  const [cartIsShowen, setCartIsShowen] = useState(false);
+  const handleCartIsShowen = () => {
+    setCartIsShowen(!cartIsShowen);
+  };
 
   const cartContext = {
     items: [],
@@ -11,7 +16,8 @@ const CartProvider = (props) => {
     addItem: handleAddItem,
     removeItem: handleRemoveItem,
     cartIsShowen: false,
-    setCartIsShowen: () => {},
+    setCartIsShowen,
+    handleCartIsShowen,
   };
 
   return (
