@@ -6,13 +6,19 @@ import CartIcon from "../Cart/CartIcon";
 
 const HeaderCartButton = (props) => {
   const cartCtx = useContext(CartContext);
+  const numberOfCartItems = cartCtx.items.reduce((currentNumber, item) => {
+    return currentNumber + item.amount;
+  }, 0);
+
+  console.log(numberOfCartItems);
+
   return (
     <button className={classes.button} onClick={props.onClick}>
       <span>
         <CartIcon className={classes.icon} />
       </span>
       <span>Yout Cart</span>
-      <span className={classes.badge}>3</span>
+      <span className={classes.badge}>{numberOfCartItems}</span>
     </button>
   );
 };
