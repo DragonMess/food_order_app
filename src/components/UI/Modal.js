@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import ReactDOM from "react-dom";
-import CartContext from "../../store/cart-context";
+import CartContext from "../../store/CartContext";
 
 import classes from "./Modal.module.css";
 

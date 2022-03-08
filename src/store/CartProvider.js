@@ -1,4 +1,4 @@
-import CartContext from "./cart-context";
+import CartContext from "./CartContext";
 import { useState, useReducer } from "react";
 
 const initialCartReducer = {
@@ -41,13 +41,24 @@ const CartProvider = (props) => {
     totalAmount: cartState.totalAmount,
     addItem: handleAddItem,
     removeItem: handleRemoveItem,
-    cartIsShowen: false,
-    setCartIsShowen,
-    handleCartIsShowen,
+    cartIsShowen: cartIsShowen,
+    setCartIsShowen: setCartIsShowen,
+    handleCartIsShowen: handleCartIsShowen,
+    state: useState(0),
   };
 
   return (
-    <CartContext.Provider value={cartContext}>
+    <CartContext.Provider
+      value={{
+        items: cartState.items,
+        totalAmount: cartState.totalAmount,
+        addItem: handleAddItem,
+        removeItem: handleRemoveItem,
+        cartIsShowen: cartIsShowen,
+        setCartIsShowen: setCartIsShowen,
+        handleCartIsShowen: handleCartIsShowen,
+      }}
+    >
       {props.children}
     </CartContext.Provider>
   );

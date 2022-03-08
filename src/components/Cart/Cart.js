@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import Modal from "../UI/Modal";
-
+import CartContext from "../../store/CartContext";
 import classes from "./Cart.module.css";
 
 const cartItems = (
@@ -12,23 +12,28 @@ const cartItems = (
 );
 
 const Cart = (props) => {
+  const { handleCartIsShowen, cartIsShowen } = useContext(CartContext);
   return (
-    <Modal onClick={props.handleCartIsShowen}>
-      {cartItems}
-      <div className={classes.total}>
-        <span>Total amount</span>
-        <span>35.62</span>
-      </div>
-      <div className={classes.actions}>
-        <button
-          className={classes["button-alt"]}
-          onClick={props.handleCartIsShowen}
-        >
-          Close
-        </button>
-        <button className={classes.button}>Order</button>
-      </div>
-    </Modal>
+    <>
+      {cartIsShowen && (
+        <Modal onClick={handleCartIsShowen}>
+          {cartItems}
+          <div className={classes.total}>
+            <span>Total amount</span>
+            <span>35.62</span>
+          </div>
+          <div className={classes.actions}>
+            <button
+              className={classes["button-alt"]}
+              onClick={handleCartIsShowen}
+            >
+              Close
+            </button>
+            <button className={classes.button}>Order</button>
+          </div>
+        </Modal>
+      )}
+    </>
   );
 };
 export default Cart;
