@@ -35,6 +35,29 @@ const cartReducer = (state, action) => {
       totalAmount: updatedTotalAmount,
     };
   }
+
+  if (action.type === "REMOVE") {
+    // Find index of the cart item
+    const existingCartItemIndex = state.items.findIndex(
+      (item) => item.id === action.id
+    );
+    // verify if item exist in cart
+    const existingItem = state.items[existingCartItemIndex];
+
+    const updatedTotalAmount = state.totalAmount - existingItem.price;
+    let updatedItems;
+    if (existingItem.amount === 1) {
+      updatedItems = state.items.filter((item) => item.id !== action.id);
+    } else {
+      const updatedItem = { ...existingItem, amount: existingItem.amount - 1 };
+      updatedItems = [...state.items];
+      updatedItems[existingCartItemIndex] = updatedItem;
+    }
+    return {
+      items: updatedItems,
+      totalAmount: updatedTotalAmount,
+    };
+  }
   return initialCartReducer;
 };
 
@@ -64,21 +87,10 @@ const CartProvider = (props) => {
     cartIsShowen: cartIsShowen,
     setCartIsShowen: setCartIsShowen,
     handleCartIsShowen: handleCartIsShowen,
-    state: useState(0),
   };
 
   return (
-    <CartContext.Provider
-      value={{
-        items: cartState.items,
-        totalAmount: cartState.totalAmount,
-        addItem: handleAddItem,
-        removeItem: handleRemoveItem,
-        cartIsShowen: cartIsShowen,
-        setCartIsShowen: setCartIsShowen,
-        handleCartIsShowen: handleCartIsShowen,
-      }}
-    >
+    <CartContext.Provider value={cartContext}>
       {props.children}
     </CartContext.Provider>
   );
