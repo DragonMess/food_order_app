@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Cart from "./components/Cart/Cart";
 import Header from "./components/Layout/Header";
 import Meals from "./components/Meals/Meals";
@@ -7,19 +7,11 @@ import { useContext } from "react";
 import CartContext from "./store/CartContext";
 
 function App() {
-  const { cartIsShowen, handleCartIsShowen, setCartIsShowen } =
-    useContext(CartContext);
-
-  useEffect(() => {
-    console.log(cartIsShowen);
-  }, [cartIsShowen]);
+  const { cartIsShowen, handleCartIsShowen } = useContext(CartContext);
 
   return (
     <CartProvider>
-      {/* {cartIsShowen && <Cart />} */}
       <Cart />
-      {console.log(cartIsShowen)}
-      {console.log(handleCartIsShowen)}
       <Header />
       <main>
         <Meals />
